@@ -26,7 +26,7 @@ const Car = mongoose.model('Car', carSchema);
 
 const csvList = [];
 
-fs.createReadStream('/data100.csv')
+fs.createReadStream('data100.csv')
     .pipe(parse({
         columns: true,
         skip_empty_lines: true
