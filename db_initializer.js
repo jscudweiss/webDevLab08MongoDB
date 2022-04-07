@@ -10,16 +10,38 @@ const fs = require('fs');
 mongoose.connect('mongodb://localhost:27017/carDB',
     {useNewUrlParser: true}, function () {
         console.log("db connection successful");
-    });
+});
 
 const carSchema = {
-    stock_num: String,
-    make: String,
-    model: String,
-    year: String,
-    color: String,
-    url: String,
-    price: String
+    stock_num: {
+        type: String,
+        required: "required"
+    },
+
+    make: {
+        type: String,
+        required: "required"
+    },
+    model: {
+        type: String,
+        required: "required"
+    },
+    year: {
+        type: String,
+        required: "required"
+    },
+    color: {
+        type: String,
+        required: "required"
+    },
+    url: {
+        type: String,
+        required: "required"
+    },
+    price: {
+        type: String,
+        required: "required"
+    }
 }
 
 const Car = mongoose.model('Car', carSchema);
@@ -36,7 +58,7 @@ fs.createReadStream('data100.csv')
         csvList.push(csvrow);
     })
     .on('end', function () {
-        Car.insertMany(csvList,{},(err)=>{
+        Car.insertMany(csvList, {}, (err) => {
             if (err) {
                 console.log(err);
             } else {
