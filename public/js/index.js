@@ -1,10 +1,11 @@
 function get_car_object(car, idx) {
-    return `<div class="carRow row ${idx % 2 === 0 ? 'even_row' : 'odd_row'}" data-m="${car._id}">
+    return `<li class="carRow row ${idx % 2 === 0 ? 'even_row' : 'odd_row'}" data-m="${car._id}">
         <div class="col-3"><a>${car.make}</a></div>
         <div class="col-3"><a>${car.model}</a></div>
         <div class="col-2"><a>${car.year}</a></div>
         <div class="col-2"><a>${car.price}</a></div>
-    </div>`
+        <div class="col-2"><button type="button" class="btn btn-outline-primary">Show More</button></div>
+    </li>`
 }
 
 function showList(cars) {
@@ -13,9 +14,9 @@ function showList(cars) {
         console.log(car);
         $('#car_list').append(get_car_object(car, idx));
     });
-
-    $('.carRow').on('click', function () {
-        const car_id = $(this).attr('data-m');
+    $('.col-2 .btn').on('click', function () {
+        const car_id = $(this).parents('li').attr('data-m');
+        //console.log(car_id)
         location.href = "detail.html?car_id=" + car_id;
     });
 }
